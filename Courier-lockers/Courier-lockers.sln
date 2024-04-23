@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Courier-lockers", "Courier-lockers.csproj", "{DD2887F5-A37A-4023-9F3E-B8C51E1A03C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SClient", "..\SClient\SClient.csproj", "{CD4EB6DA-280B-428F-A168-3D22C9C7FAAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schedule", "..\Schedule\Schedule.csproj", "{97F870BB-9B1D-4E86-B597-14CDAC939481}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redis", "..\Redis\Redis.csproj", "{AE16CDC6-8C4F-45B4-847B-B02EA8D50DFB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Courier-lockers.WPF", "..\Courier-lockers.WPF\Courier-lockers.WPF.csproj", "{353EC050-59A9-4CB1-9A5D-E66AAC129C9A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Courier-lockers.3D", "..\Courier-lockers.3D\Courier-lockers.3D.csproj", "{D440B9A5-34D3-478D-A921-E54F5022BC40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD2887F5-A37A-4023-9F3E-B8C51E1A03C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2887F5-A37A-4023-9F3E-B8C51E1A03C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2887F5-A37A-4023-9F3E-B8C51E1A03C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2887F5-A37A-4023-9F3E-B8C51E1A03C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD4EB6DA-280B-428F-A168-3D22C9C7FAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD4EB6DA-280B-428F-A168-3D22C9C7FAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD4EB6DA-280B-428F-A168-3D22C9C7FAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD4EB6DA-280B-428F-A168-3D22C9C7FAAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F870BB-9B1D-4E86-B597-14CDAC939481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F870BB-9B1D-4E86-B597-14CDAC939481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F870BB-9B1D-4E86-B597-14CDAC939481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F870BB-9B1D-4E86-B597-14CDAC939481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE16CDC6-8C4F-45B4-847B-B02EA8D50DFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE16CDC6-8C4F-45B4-847B-B02EA8D50DFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE16CDC6-8C4F-45B4-847B-B02EA8D50DFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE16CDC6-8C4F-45B4-847B-B02EA8D50DFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{353EC050-59A9-4CB1-9A5D-E66AAC129C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{353EC050-59A9-4CB1-9A5D-E66AAC129C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{353EC050-59A9-4CB1-9A5D-E66AAC129C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{353EC050-59A9-4CB1-9A5D-E66AAC129C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D440B9A5-34D3-478D-A921-E54F5022BC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D440B9A5-34D3-478D-A921-E54F5022BC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D440B9A5-34D3-478D-A921-E54F5022BC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D440B9A5-34D3-478D-A921-E54F5022BC40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DCFD3C54-A9F4-4412-90F9-CEC9FBDD3CD6}
+	EndGlobalSection
+EndGlobal

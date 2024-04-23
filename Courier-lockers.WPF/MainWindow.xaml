@@ -1,0 +1,330 @@
+﻿<mah:MetroWindow
+    x:Class="Courier_lockers.WPF.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:Courier_lockers.WPF"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="1600"
+    Height="900"
+    AllowsTransparency="True"
+    Background="Transparent"
+    BorderThickness="0"
+    Icon="bean-botter.jpg"
+    ResizeMode="NoResize"
+    UseNoneWindowStyle="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Border
+        BorderBrush="Black"
+        BorderThickness="1"
+        ClipToBounds="True"
+        CornerRadius="5">
+        <Grid>
+            <Image Source="bean-botter.jpg" Stretch="Fill">
+                <Image.Effect>
+                    <BlurEffect Radius="20" />
+                </Image.Effect>
+            </Image>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="Black" BorderThickness="0,0,1,0">
+                    <StackPanel VerticalAlignment="Center">
+                        <Image
+                            Width="50"
+                            Height="50"
+                            RenderTransformOrigin="0.5,0.5"
+                            Source="bean-botter.jpg"
+                            Stretch="Fill">
+                            <Image.RenderTransform>
+                                <RotateTransform x:Name="trans" />
+                            </Image.RenderTransform>
+                            <Image.Clip>
+                                <EllipseGeometry
+                                    Center="25,25"
+                                    RadiusX="25"
+                                    RadiusY="25" />
+
+                            </Image.Clip>
+                            <Image.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                By="360"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="trans"
+                                                Storyboard.TargetProperty="Angle"
+                                                Duration="0:0:2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Image.Triggers>
+                        </Image>
+                        <Border
+                            Height="400"
+                            Margin="10"
+                            Background="WhiteSmoke"
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            ClipToBounds="True"
+                            CornerRadius="5">
+                            <Grid>
+                                <Border CornerRadius="5">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="bean-botter.jpg" Stretch="Fill" />
+                                    </Border.Background>
+                                </Border>
+                                <mah:FlipView
+                                    IsBannerEnabled="False"
+                                    IsNavigationEnabled="False"
+                                    MouseHoverBorderEnabled="False"
+                                    SelectedIndex="1">
+                                    <Border Background="#33333333">
+                                        <UniformGrid
+                                            Margin="10"
+                                            Columns="2"
+                                            Rows="2">
+                                            <UniformGrid.Resources>
+                                                <Style BasedOn="{StaticResource MahApps.Styles.Button.Circle}" TargetType="Button">
+                                                    <Setter Property="mah:ControlsHelper.CornerRadius" Value="20" />
+                                                    <Setter Property="Margin" Value="5" />
+                                                    <Setter Property="BorderThickness" Value="0" />
+                                                </Style>
+                                            </UniformGrid.Resources>
+                                            <Button Background="Aqua">
+                                                <DockPanel>
+                                                    <TextBlock DockPanel.Dock="Bottom" Text="取快递" />
+                                                    <iconPacks:PackIconTypicons
+                                                        Width="40"
+                                                        Height="40"
+                                                        Kind="Dropbox" />
+                                                </DockPanel>
+                                            </Button>
+                                            <Button Background="Yellow">
+                                                <DockPanel>
+                                                    <TextBlock DockPanel.Dock="Bottom" Text="存快递" />
+                                                    <iconPacks:PackIconModern
+                                                        Width="40"
+                                                        Height="40"
+                                                        Kind="Inbox" />
+                                                </DockPanel>
+                                            </Button>
+                                            <Button Background="SteelBlue">
+                                                <DockPanel>
+                                                    <TextBlock DockPanel.Dock="Bottom" Text="寄快递" />
+                                                    <iconPacks:PackIconFontAwesome
+                                                        Width="40"
+                                                        Height="40"
+                                                        Kind="ParachuteBoxSolid" />
+                                                </DockPanel>
+                                            </Button>
+                                            <Button Background="Orange">
+                                                <DockPanel>
+                                                    <TextBlock DockPanel.Dock="Bottom" Text="管理员" />
+                                                    <iconPacks:PackIconFontAwesome
+                                                        Width="40"
+                                                        Height="40"
+                                                        Kind="UserCircleSolid" />
+                                                </DockPanel>
+                                            </Button>
+                                        </UniformGrid>
+                                    </Border>
+                                    <Border>
+                                        <Grid>
+                                            <Grid Opacity="{Binding Opacity}">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="auto" />
+                                                </Grid.RowDefinitions>
+                                                <DockPanel>
+                                                    <Button
+                                                        Margin="3"
+                                                        mah:ControlsHelper.FocusBorderThickness="0"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Content="{iconPacks:Fontisto Kind=AngleLeft}" />
+                                                    <TextBlock Margin="6" Text="选择快递柜" />
+                                                </DockPanel>
+                                                <Border Grid.Row="1">
+                                                    <DockPanel Margin="3" VerticalAlignment="Center">
+                                                        <TextBlock
+                                                            Margin="3"
+                                                            DockPanel.Dock="Bottom"
+                                                            Foreground="Red"
+                                                            Text="{Binding Error}"
+                                                            TextAlignment="Center" />
+                                                        <TextBlock VerticalAlignment="Center" Text="快递柜号：" />
+                                                        <Button
+                                                            Margin="3,0"
+                                                            Command="{Binding GetAreaCommand}"
+                                                            Content="{iconPacks:BootstrapIcons Kind=Search}"
+                                                            DockPanel.Dock="Right" />
+
+                                                        <TextBox
+                                                            Background="#aaffffff"
+                                                            IsReadOnly="True"
+                                                            Text="{Binding Area}" />
+                                                    </DockPanel>
+                                                </Border>
+                                                <UniformGrid
+                                                    Grid.Row="2"
+                                                    Height="160"
+                                                    Margin="5"
+                                                    Columns="3"
+                                                    Rows="4">
+                                                    <UniformGrid.Resources>
+                                                        <Style BasedOn="{StaticResource MahApps.Styles.Button}" TargetType="Button">
+                                                            <Setter Property="Background" Value="#FF0D6F7D" />
+                                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                                            <Setter Property="mah:ControlsHelper.CornerRadius" Value="0" />
+                                                        </Style>
+                                                    </UniformGrid.Resources>
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="7"
+                                                        Content="7" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="8"
+                                                        Content="8" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="9"
+                                                        Content="9" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="4"
+                                                        Content="4" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="5"
+                                                        Content="5" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="6"
+                                                        Content="6" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="1"
+                                                        Content="1" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="2"
+                                                        Content="2" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="3"
+                                                        Content="3" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="←"
+                                                        Content="←" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="0"
+                                                        Content="0" />
+                                                    <Button
+                                                        Command="{Binding KeyboardInputCommand}"
+                                                        CommandParameter="×"
+                                                        Content="×" />
+                                                </UniformGrid>
+
+                                            </Grid>
+                                            <mah:ProgressRing Grid.RowSpan="3" Visibility="{Binding PendingVisibility}" />
+                                        </Grid>
+                                    </Border>
+                                </mah:FlipView>
+                            </Grid>
+                        </Border>
+
+                    </StackPanel>
+                </Border>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Background="#008a00"
+                        FontSize="18"
+                        Foreground="White"
+                        Text="豌    豆    哥    哥    快    递    柜"
+                        TextAlignment="Center" />
+                    <ListBox
+                        Grid.Row="1"
+                        Background="Transparent"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        ItemsSource="{Binding Boxes}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="{Binding Cols}" Rows="{Binding Rows}" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource MahApps.Styles.ListBoxItem}" TargetType="ListBoxItem">
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="ClipToBounds" Value="True" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="Transparent">
+                                    <Ellipse
+                                        Width="10"
+                                        Height="10"
+                                        Fill="Pink" />
+                                    <Border
+                                        Background="#008a00"
+                                        BorderBrush="Black"
+                                        BorderThickness="0.5">
+                                        <Border.RenderTransform>
+                                            <TranslateTransform x:Name="trans" />
+                                        </Border.RenderTransform>
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Id}" />
+                                    </Border>
+
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard x:Name="open">
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetName="trans"
+                                                        Storyboard.TargetProperty="X"
+                                                        From="0"
+                                                        To="-40"
+                                                        Duration="0:0:0.5" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="open" />
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Border>
+</mah:MetroWindow>
