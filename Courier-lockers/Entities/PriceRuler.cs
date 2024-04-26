@@ -12,13 +12,16 @@ namespace Courier_lockers.Entities
         [Column("Price")]
         public decimal price { get; set; }
 
-        [Column("PriceRuler")]
-        public decimal priceRuler { get; set; }
+        [Column("PriceTime")]
+        public string PriceTime { get; set; }
 
         [Column("StartDateTime")]
-        public string startDateTime { get; set; }
+        public string? startDateTime { get; set; }
 
         [Column("EndDateTime")]
-        public string endDateTime { get; set; }
+        public string? endDateTime { get; set; }
+
+        [Column("Activate")]
+        public int Activate { get; set; }
     }
 }

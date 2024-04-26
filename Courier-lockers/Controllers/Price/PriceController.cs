@@ -1,5 +1,6 @@
 ﻿using Courier_lockers.Entities;
 using Courier_lockers.Repos;
+using Courier_lockers.Repos.Price;
 using Courier_lockers.Services.Price;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,16 +15,17 @@ namespace Courier_lockers.Controllers.Price
 
 
         [HttpPost]
-        public async Task<ActionResult<Result>> InPriceRuler([FromServices] IPriceRulerRepository priceRulerRepository,PriceRuler priceRuler)
+        public async Task<ActionResult<Result>> InPriceRuler([FromServices] IPriceRulerRepository priceRulerRepository,InPriceTime priceRuler)
         {
             var s=await priceRulerRepository.InPriceRuler(priceRuler);
             return Ok(s);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Page<PriceRuler>>> PriceRulerPage([FromServices] IPriceRulerRepository priceRulerRepository, PriceRuler priceRuler)
+        public async Task<ActionResult<Page<PriceRuler>>> PriceRulerPage([FromServices] IPriceRulerRepository priceRulerRepository, Page<InPriceTimePage> priceRuler)
         {
-           return await priceRulerRepository.PriceRulerPage(priceRuler);
+           var s= await priceRulerRepository.PriceRulerPage(priceRuler);
+            return Ok(s);
         }
 
     }
