@@ -3,6 +3,7 @@ using Courier_lockers.Data;
 using Courier_lockers.Helper;
 using Courier_lockers.Models;
 using Courier_lockers.Services;
+using Microsoft.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ServiceStack.Redis;
@@ -124,7 +125,7 @@ namespace Courier_lockers
                 app.UseDeveloperExceptionPage();
             }
 
-
+            
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>
