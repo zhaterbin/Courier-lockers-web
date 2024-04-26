@@ -2,6 +2,8 @@
 using Courier_lockers.Repos;
 using Courier_lockers.Services.Price;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using WMSService.Models;
 
 namespace Courier_lockers.Controllers.Price
 {
@@ -17,5 +19,12 @@ namespace Courier_lockers.Controllers.Price
             var s=await priceRulerRepository.InPriceRuler(priceRuler);
             return Ok(s);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Page<PriceRuler>>> PriceRulerPage([FromServices] IPriceRulerRepository priceRulerRepository, PriceRuler priceRuler)
+        {
+           return await priceRulerRepository.PriceRulerPage(priceRuler);
+        }
+
     }
 }
