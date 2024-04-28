@@ -28,5 +28,6 @@ namespace Courier_lockers.Controllers.Price
             return Ok(s);
         }
 
+
     }
 }
