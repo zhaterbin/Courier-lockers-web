@@ -18,7 +18,6 @@ namespace Courier_lockers.Entities
         [Column("Password")]
         [JsonIgnore]
         public string Password { get; set; }
-        [Column("Token")]
-        public string? Token { get; set; }
+ 
     }
 }
