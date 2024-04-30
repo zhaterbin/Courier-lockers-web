@@ -8,5 +8,6 @@ namespace Courier_lockers.Services.UserToken
         AuthenticateResponse Authenticate(AuthenticateRequest model);
         IEnumerable<User> GetAll();
         User GetById(int id);
+        string VerifyJwtToken(string token);
     }
 }

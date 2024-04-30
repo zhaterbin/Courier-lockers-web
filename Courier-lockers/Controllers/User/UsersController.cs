@@ -1,13 +1,19 @@
 ﻿using Courier_lockers.Helper;
 using Courier_lockers.Repos.UserInReturn;
 using Courier_lockers.Services.UserToken;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Courier_lockers.Repos;
+using System.Net;
+using ServiceStack;
 
 namespace Courier_lockers.Controllers.User
 {
     [ApiController]
-    [Route("api/user/[action]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/user/[action]")]
     public class UsersController : ControllerBase
     {
 
@@ -19,22 +25,61 @@ namespace Courier_lockers.Controllers.User
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(AuthenticateRequest model)
+      
+        public ResultResponse Authenticate(AuthenticateRequest model)
         {
+            ResultResponse res = new ResultResponse();
             var response = _userService.Authenticate(model);
 
-            if (response == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
 
-            return Ok(response);
+            var claims = new Claim[]
+              {
+                  new Claim(ClaimTypes.Name, response.Username),
+              };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            Response.Cookies.Append("x-access-token", response.Token,
+              new CookieOptions()
+              {
+                  Path = "/",
+                  HttpOnly = true
+              });
+            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            try
+            {
+                if (response != null)
+                {
+                    res.code = 200;
+                    res.data = new Repos.Data
+                    {
+                        token = response.Token,
+                        message = "登录成功",
+                        state = true
+                    };
+                }
+            }catch(Exception ex)
+            {
+
+            }
+            
+            return res;
         }
 
         [Authorize]
         [HttpGet]
-        public IActionResult GetAll()
+        public ResultResponse getInfo([FromQuery(Name = "token")] string token)
         {
-            var users = _userService.GetAll();
-            return Ok(users);
+            var response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Headers.Add("X-Token", token);
+            string tokenValue= _userService.VerifyJwtToken(token);
+            ResultResponse res = new ResultResponse();
+            res.code = 200;
+            res.data = new Repos.Data
+            {
+                token = token,
+                message = "登录成功",
+                state = true
+            };
+            return res;
         }
     }
 }

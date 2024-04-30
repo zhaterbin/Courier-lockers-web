@@ -5,6 +5,7 @@ using Courier_lockers.Models;
 using Courier_lockers.Services;
 using Courier_lockers.Services.UserToken;
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -42,9 +43,40 @@ namespace Courier_lockers
                 services.AddControllers();
                 services.AddControllers().AddJsonOptions(opt =>
                 {
-                    opt.JsonSerializerOptions.PropertyNamingPolicy = new JsonPolicy.UpperCaseNamingPolicy();
+                    //opt.JsonSerializerOptions.PropertyNamingPolicy = new JsonPolicy.UpperCaseNamingPolicy();
                     opt.JsonSerializerOptions.IgnoreNullValues = true;
                 });
+                //services.AddAuthentication(options =>
+                //{
+                //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                //})
+                //.AddJwtBearer(options =>
+                //{
+
+                //    options.TokenValidationParameters = new TokenValidationParameters
+                //    {
+                //        ValidateIssuer = true,
+                //        ValidateAudience = true,
+                //        ValidateLifetime = true,
+                //        ValidateIssuerSigningKey = true,
+                //        ValidIssuer = Configuration["Jwt:Issuer"],
+                //        ValidAudience = Configuration["Jwt:Audience"],
+                //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                //    };
+                //});
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+               .AddCookie(options =>
+               {
+                   options.ExpireTimeSpan = TimeSpan.FromHours(3);
+                   options.Cookie.Name = "user-session";
+                   options.SlidingExpiration = true;
+               });
+
                 // 添加 CORS 服务
                 //services.AddCors(options =>
                 //{
@@ -102,39 +134,7 @@ namespace Courier_lockers
 
 
                 #region JWT鉴权认证
-                var jwtConfig = Configuration.GetSection("Jwt");
-                //生成密钥
-                var symmetricKeyAsBase64 = jwtConfig.GetValue<string>("Secret");
-                var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
-                var signingKey = new SymmetricSecurityKey(keyByteArray);
-                //认证参数
-                services.AddAuthentication("Bearer")
-                    .AddJwtBearer(o =>
-                    {
-                        o.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateIssuerSigningKey = true,//是否验证签名,不验证的画可以篡改数据，不安全
-                            IssuerSigningKey = signingKey,//解密的密钥
-                            ValidateIssuer = true,//是否验证发行人，就是验证载荷中的Iss是否对应ValidIssuer参数
-                            ValidIssuer = jwtConfig.GetValue<string>("Iss"),//发行人
-                            ValidateAudience = true,//是否验证订阅人，就是验证载荷中的Aud是否对应ValidAudience参数
-                            ValidAudience = jwtConfig.GetValue<string>("Aud"),//订阅人
-                            ValidateLifetime = true,//是否验证过期时间，过期了就拒绝访问
-                            ClockSkew = TimeSpan.Zero,//这个是缓冲过期时间，也就是说，即使我们配置了过期时间，这里也要考虑进去，过期时间+缓冲，默认好像是7分钟，你可以直接设置为0
-                            RequireExpirationTime = true,
-                        };
-                        o.Events = new JwtBearerEvents
-                        {
-                            OnAuthenticationFailed = context =>
-                            {   //令牌过期
-                                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                                {
-                                    context.Response.Headers.Add("act", "expired");
-                                }
-                                return Task.CompletedTask;
-                            }
-                        };
-                    });
+              
                 #endregion
                 //services.AddSingleton(new JwtHelper());
                 services.AddCors();

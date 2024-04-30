@@ -37,7 +37,7 @@ namespace Courier_lockers.Controllers.InStorage
         /// <param name="dataBase"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Result>>  CloseCabinet(Repos.Data dataBase)
+        public async Task<ActionResult<Result>>  CloseCabinet(Repos.DataBase dataBase)
         {
             return Ok();
         }
@@ -48,7 +48,7 @@ namespace Courier_lockers.Controllers.InStorage
         /// <param name="dataBase"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Result>> OpenCabinet(Repos.Data dataBase)
+        public async Task<ActionResult<Result>> OpenCabinet(Repos.DataBase dataBase)
         {
             return Ok();
         }

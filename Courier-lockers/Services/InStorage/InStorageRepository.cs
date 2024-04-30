@@ -88,7 +88,7 @@ namespace Courier_lockers.Services.InStorage
                 //}
                 result.Success = true;
                 result.Messsage = "送入快递柜成功";
-                result.data = new Repos.Data
+                result.data = new Repos.DataBase
                 {
                     cell_code= cellcode.CELL_CODE,
                     Isopening= "closing"
