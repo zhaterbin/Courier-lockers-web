@@ -64,6 +64,11 @@ namespace Courier_lockers.Controllers.User
             return res;
         }
 
+        /// <summary>
+        /// todo这里没写
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpGet]
         public ResultResponse getInfo([FromQuery(Name = "token")] string token)

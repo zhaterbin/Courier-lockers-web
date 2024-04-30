@@ -12,4 +12,5 @@
         public string message { get; set; }
         public bool state { get; set; }
     }
+
 }
