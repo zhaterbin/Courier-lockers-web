@@ -11,7 +11,7 @@
  Target Server Version : 80200 (8.2.0)
  File Encoding         : 65001
 
- Date: 19/04/2024 15:19:32
+ Date: 08/05/2024 08:13:11
 */
 
 SET NAMES utf8mb4;
@@ -3557,15 +3557,19 @@ DROP TABLE IF EXISTS `priceruler`;
 CREATE TABLE `priceruler`  (
   `Price` decimal(10, 2) NULL DEFAULT NULL,
   `StartDateTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `PriceRuler` decimal(10, 2) NULL DEFAULT NULL,
+  `PriceTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `EndDateTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `PriceId` int NOT NULL AUTO_INCREMENT,
+  `Activate` int NULL DEFAULT NULL,
   PRIMARY KEY (`PriceId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of priceruler
 -- ----------------------------
+INSERT INTO `priceruler` VALUES (1.00, '2024-04-26 11:04:08', '30Min', NULL, 2, 1);
+INSERT INTO `priceruler` VALUES (0.00, '2024-05-07 14:15:32', 'string', NULL, 4, 1);
+INSERT INTO `priceruler` VALUES (0.00, '2024-05-07 14:15:43', 'string', NULL, 5, 0);
 
 -- ----------------------------
 -- Table structure for storage
@@ -3593,5 +3597,24 @@ INSERT INTO `storage` VALUES (9, 85, 'Test', 'Test', '2024/4/19 10:44:33', 'WPF�
 INSERT INTO `storage` VALUES (10, 106, 'Test', 'Test', '2024/4/19 10:54:17', 'WPF国手', '7755');
 INSERT INTO `storage` VALUES (11, 127, 'Test', 'Test', '2024/4/19 11:19:33', 'WPF国手', '7715');
 INSERT INTO `storage` VALUES (12, 148, 'Test', 'Test', '2024/4/19 11:25:22', 'WPF国手', '7115');
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `Id` int NOT NULL,
+  `Username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `UserType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `FirstName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `LastName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`Id` DESC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, 'admin', 'test', '1', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

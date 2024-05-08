@@ -17,6 +17,16 @@ namespace Courier_lockers.Services.Price
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public async Task<bool> DeleteRuler(int id)
+        {
+            var priceRuler=_context.priceRulers.FirstOrDefault(x => x.priceId == id);
+            if (priceRuler != null)
+            {
+                _context.priceRulers.Remove(priceRuler);
+            }
+            return await _context.SaveChangesAsync()>0;
+        }
+
         public async Task<Result> InPriceRuler(InPriceTime priceRuler)
         {
 
@@ -49,6 +59,7 @@ namespace Courier_lockers.Services.Price
             {
 
             var dto=priceRuler.requestData ?? new InPriceTimePage();
+                //dto.UserId = null;
            var prices= _context.priceRulers.Where(f => true);
 
             //todo 以后再写

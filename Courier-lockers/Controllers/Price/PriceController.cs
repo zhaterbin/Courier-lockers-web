@@ -28,6 +28,10 @@ namespace Courier_lockers.Controllers.Price
             return Ok(s);
         }
 
-
+        [HttpPost]
+        public  async Task<bool> DeleteRuler([FromServices] IPriceRulerRepository priceRulerRepository, int id)
+        {
+           return  await priceRulerRepository.DeleteRuler(id);
+        }
     }
 }
