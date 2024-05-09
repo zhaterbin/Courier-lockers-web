@@ -16,10 +16,6 @@ namespace Courier_lockers.Services.UserToken
 {
     public class UserService : IUserService
     {
-        private List<User> _users = new List<User>
-    {
-        new User { Id = 1, FirstName = "Test", LastName = "User", Username = "admin", Password = "test" }
-    };
         private readonly AppSettings _appSettings;
         private readonly ServiceDbContext _context;
         public UserService(IOptions<AppSettings> appSettings, ServiceDbContext context)

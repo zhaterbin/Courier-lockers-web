@@ -4,6 +4,8 @@
     {
         public decimal Price { get; set; }
         public string PriceTime { get; set; }
+        public string Activate { get; set; }
+        public string ReMark { get; set; }
     }
 
     public class InPriceTimePage
