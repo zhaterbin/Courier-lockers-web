@@ -11,7 +11,7 @@ namespace Courier_lockers.Entities
         public int Id { get; set; }
         [Column("FirstName")]
         public string? FirstName { get; set; }
-        [Column("FirstName")]
+        [Column("LastName")]
         public string? LastName { get; set; }
         [Column("Username")]
         public string Username { get; set; }
