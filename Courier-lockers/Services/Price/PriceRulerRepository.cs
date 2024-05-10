@@ -27,6 +27,22 @@ namespace Courier_lockers.Services.Price
             return await _context.SaveChangesAsync()>0;
         }
 
+        public async Task<bool> UpdateRuler(UpdatePriceTime priceRuler)
+        {
+            Result result = new();
+            var pr=_context.priceRulers.FirstOrDefault(n=>n.priceId==priceRuler.PriceId);
+            if (pr !=null)
+            {
+                pr.price = priceRuler.Price;
+                pr.Activate = priceRuler.Activate;
+                pr.PriceTime = priceRuler.PriceTime;
+                _context.priceRulers.Update(pr);
+            }
+
+            return await _context.SaveChangesAsync() > 0;
+
+        }
+
         public async Task<Result> InPriceRuler(InPriceTime priceRuler)
         {
 

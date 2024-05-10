@@ -13,5 +13,7 @@ namespace Courier_lockers.Services.Price
         Task<Result> InPriceRuler(InPriceTime priceRuler);
         Task<ActionResult<Page<PriceRuler>>> PriceRulerPage(PriceRuler priceRuler);
         Task<Page<PriceRuler>> PriceRulerPage(Page<InPriceTimePage> priceRuler);
+
+        Task<bool> UpdateRuler(UpdatePriceTime priceRuler);
     }
 }

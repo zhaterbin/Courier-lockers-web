@@ -10,7 +10,14 @@
 
     public class InPriceTimePage
     {
-    
         public string? UserId { get; set; }
+    }
+
+    public class UpdatePriceTime 
+    {
+        public int PriceId { get; set; }
+        public decimal Price { get; set; }
+        public string PriceTime { get; set; }
+        public int Activate { get; set; }
     }
 }
