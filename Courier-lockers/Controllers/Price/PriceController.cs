@@ -2,6 +2,7 @@
 using Courier_lockers.Repos;
 using Courier_lockers.Repos.Price;
 using Courier_lockers.Services.Price;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WMSService.Models;
@@ -9,6 +10,7 @@ using WMSService.Models;
 namespace Courier_lockers.Controllers.Price
 {
     [ApiController]
+   
     [Route("api/InStorage/[action]")]
     public class PriceController : ControllerBase
     {
@@ -32,6 +34,7 @@ namespace Courier_lockers.Controllers.Price
            return  await priceRulerRepository.DeleteRuler(id);
         }
         [HttpPost]
+        [Authorize(policy: "Admin")]
         public async Task<bool> UpdateRuler([FromServices]IPriceRulerRepository priceRulerRepository, UpdatePriceTime priceRuler)
         {
             return await priceRulerRepository.UpdateRuler(priceRuler);

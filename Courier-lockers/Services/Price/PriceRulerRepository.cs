@@ -2,6 +2,7 @@
 using Courier_lockers.Entities;
 using Courier_lockers.Repos;
 using Courier_lockers.Repos.Price;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WMSService.Models;
@@ -9,6 +10,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Courier_lockers.Services.Price
 {
+    [Authorize(policy:"admin")]
     public class PriceRulerRepository :IPriceRulerRepository
     {
         private readonly ServiceDbContext _context;

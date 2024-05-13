@@ -18,6 +18,7 @@ namespace Courier_lockers.Entities
         [Column("Password")]
         [JsonIgnore]
         public string Password { get; set; }
- 
+        //[column]
+        //public IEnumerable<string> Roles { get; set; }
     }
 }

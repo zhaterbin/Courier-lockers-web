@@ -9,6 +9,7 @@ using System.Security.Claims;
 using Courier_lockers.Repos;
 using System.Net;
 using ServiceStack;
+using Courier_lockers.Services.Role;
 
 namespace Courier_lockers.Controllers.User
 {
@@ -18,10 +19,12 @@ namespace Courier_lockers.Controllers.User
     {
 
         private IUserService _userService;
+        private readonly IRoleService _roleService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService,IRoleService roleService)
         {
             _userService = userService;
+            _roleService=roleService;
         }
 
         [HttpPost("authenticate")]
@@ -29,13 +32,17 @@ namespace Courier_lockers.Controllers.User
         public ResultResponse Authenticate(AuthenticateRequest model)
         {
             ResultResponse res = new ResultResponse();
+
             var response = _userService.Authenticate(model);
 
-
-            var claims = new Claim[]
+            var roles=_roleService.GetRolesByUserId(response.Id);
+            var claims = new List<Claim>
               {
                   new Claim(ClaimTypes.Name, response.Username),
+                 
               };
+            claims.AddRange(roles.Select(n => new Claim(ClaimTypes.Role, n.RoleName)));
+            
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             Response.Cookies.Append("x-access-token", response.Token,
               new CookieOptions()
@@ -69,7 +76,6 @@ namespace Courier_lockers.Controllers.User
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        [Authorize]
         [HttpGet]
         public ResultResponse getInfo([FromQuery(Name = "token")] string token)
         {

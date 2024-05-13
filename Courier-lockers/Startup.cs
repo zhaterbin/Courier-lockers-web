@@ -134,6 +134,11 @@ namespace Courier_lockers
 
 
                 #region JWT鉴权认证
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("Admin", policy => policy.RequireRole("admin"));
+                    options.AddPolicy("User", policy => policy.RequireRole("user"));
+                });
               
                 #endregion
                 //services.AddSingleton(new JwtHelper());
