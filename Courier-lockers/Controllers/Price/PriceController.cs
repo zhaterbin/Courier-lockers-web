@@ -14,6 +14,7 @@ namespace Courier_lockers.Controllers.Price
     [Route("api/InStorage/[action]")]
     public class PriceController : ControllerBase
     {
+     
         [HttpPost]
         public async Task<ActionResult<Result>> InPriceRuler([FromServices] IPriceRulerRepository priceRulerRepository,InPriceTime priceRuler)
         {
@@ -29,7 +30,7 @@ namespace Courier_lockers.Controllers.Price
         }
 
         [HttpPost]
-        public  async Task<bool> DeleteRuler([FromServices] IPriceRulerRepository priceRulerRepository, int id)
+        public  async Task<bool> DeleteRuler([FromServices] IPriceRulerRepository priceRulerRepository,[FromBody] int id)
         {
            return  await priceRulerRepository.DeleteRuler(id);
         }

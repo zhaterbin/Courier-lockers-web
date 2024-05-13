@@ -18,7 +18,7 @@ namespace Courier_lockers.Controllers.User
     public class UsersController : ControllerBase
     {
 
-        private IUserService _userService;
+        private readonly IUserService _userService;
         private readonly IRoleService _roleService;
 
         public UsersController(IUserService userService,IRoleService roleService)

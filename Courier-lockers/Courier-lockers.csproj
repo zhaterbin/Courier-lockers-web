@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Repos\InStorage\" />
+    <Folder Include="Attributes\" />
   </ItemGroup>
 
   <ItemGroup>
