@@ -1,5 +1,6 @@
 ﻿using Courier_lockers.Data;
 using Courier_lockers.Entities;
+using Courier_lockers.Repos;
 using ServiceStack;
 
 namespace Courier_lockers.Services.Role
@@ -13,11 +14,12 @@ namespace Courier_lockers.Services.Role
             _context=context?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IEnumerable<Courier_lockers.Entities.Role> GetRolesByUserId(int userId)
+        public GetInfoResponse GetRolesByUserId(int userId)
         {
-            var res = _context.userRoles.Where(n => n.UserId == userId).Select(n => n.RoleId);
-       
-            return _context.roles.Where(n => res.Any(m => m == n.Id)).ToList();
+            var st=_context?.roleUsers.FirstOrDefault(x => x.Id == userId);
+                  
+      
+            return  new GetInfoResponse { avatar = st.avatar, introduction = st.introduction, name = st.Username, roles = new List<string> { st.RoleName } };
         }
     }
 }

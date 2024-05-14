@@ -27,6 +27,7 @@ namespace Courier_lockers.Data
         public DbSet<Permission> permissions { get; set; }
         public DbSet<UserRole> userRoles { get; set; }
         public DbSet<RolePermission> rolePermissions { get; set; }
+        public DbSet<role_user_view> roleUsers { get; set; }
         //表和视图
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,8 +44,12 @@ namespace Courier_lockers.Data
             modelBuilder.Entity<PriceRuler>().HasKey(x => x.priceId);
 
             modelBuilder.Entity<User>().HasKey(x => x.Id);
+
             modelBuilder.Entity<UserRole>().HasNoKey();
+
             modelBuilder.Entity<RolePermission>().HasNoKey();
+
+            modelBuilder.Entity<role_user_view>().HasNoKey();
         }
     }
 }

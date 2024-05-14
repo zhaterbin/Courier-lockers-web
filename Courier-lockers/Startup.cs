@@ -41,10 +41,22 @@ namespace Courier_lockers
                 services.Configure<OtherServerModel>(Configuration.GetSection("OtherServerConfig"));
                 services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
                 services.AddControllers();
+                services.AddMemoryCache();
                 services.AddControllers().AddJsonOptions(opt =>
                 {
                     //opt.JsonSerializerOptions.PropertyNamingPolicy = new JsonPolicy.UpperCaseNamingPolicy();
                     opt.JsonSerializerOptions.IgnoreNullValues = true;
+                });
+
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowOrigin",
+                        builder =>
+                        {
+                            builder.AllowAnyOrigin()
+                                   .AllowAnyMethod()
+                                   .AllowAnyHeader();
+                        });
                 });
                 //services.AddAuthentication(options =>
                 //{
@@ -194,6 +206,7 @@ namespace Courier_lockers
 
 
 
+            app.UseCors("AllowOrigin");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -10,6 +10,7 @@ using Courier_lockers.Repos;
 using System.Net;
 using ServiceStack;
 using Courier_lockers.Services.Role;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Courier_lockers.Controllers.User
 {
@@ -20,11 +21,13 @@ namespace Courier_lockers.Controllers.User
 
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
+        private readonly IMemoryCache _cache;
 
-        public UsersController(IUserService userService,IRoleService roleService)
+        public UsersController(IUserService userService, IRoleService roleService, IMemoryCache cache)
         {
             _userService = userService;
-            _roleService=roleService;
+            _roleService = roleService;
+            _cache = cache;
         }
 
         [HttpPost("authenticate")]
@@ -35,13 +38,13 @@ namespace Courier_lockers.Controllers.User
 
             var response = _userService.Authenticate(model);
 
-            var roles=_roleService.GetRolesByUserId(response.Id);
-            var claims = new List<Claim>
-              {
+            //var roles=_roleService.GetRolesByUserId(response.Id);
+            var claims = new Claim[]
+             {
                   new Claim(ClaimTypes.Name, response.Username),
                  
               };
-            claims.AddRange(roles.Select(n => new Claim(ClaimTypes.Role, n.RoleName)));
+            //claims.AddRange(roles.Select(n => new Claim(ClaimTypes.Role, n.RoleName)));
             
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             Response.Cookies.Append("x-access-token", response.Token,
@@ -50,6 +53,7 @@ namespace Courier_lockers.Controllers.User
                   Path = "/",
                   HttpOnly = true
               });
+            _cache.Set("x-access-token", response.Token);
             HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
             try
             {
@@ -77,20 +81,15 @@ namespace Courier_lockers.Controllers.User
         /// <param name="token"></param>
         /// <returns></returns>
         [HttpGet]
-        public ResultResponse getInfo([FromQuery(Name = "token")] string token)
+        public GetInfoResponse getInfo()
         {
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Headers.Add("X-Token", token);
-            string tokenValue= _userService.VerifyJwtToken(token);
-            ResultResponse res = new ResultResponse();
-            res.code = 200;
-            res.data = new Repos.Data
-            {
-                token = token,
-                message = "登录成功",
-                state = true
-            };
-            return res;
+            //var response = new HttpResponseMessage(HttpStatusCode.OK);
+            //response.Headers.Add("X-Token", token);
+            var tokenCache = _cache.Get("x-access-token")?.ToString();
+            //string accessToken = HttpContext.Request.Cookies[tokenCache];
+            var id=_userService.VerifyJwtToken(tokenCache);
+            var st=_roleService.GetRolesByUserId(int.Parse(id));
+            return st;
         }
     }
 }
