@@ -11,7 +11,7 @@
  Target Server Version : 80200 (8.2.0)
  File Encoding         : 65001
 
- Date: 08/05/2024 08:13:11
+ Date: 14/05/2024 16:12:33
 */
 
 SET NAMES utf8mb4;
@@ -35,7 +35,7 @@ CREATE TABLE `cell`  (
   `CELL_Z` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `Cabinet` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`CELL_ID` DESC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3445 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3445 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of cell
@@ -3495,7 +3495,7 @@ CREATE TABLE `edpmain`  (
   `EDPName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `EDPList` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of edpmain
@@ -3518,7 +3518,7 @@ CREATE TABLE `opearterin`  (
   PRIMARY KEY (`Operator_Id`) USING BTREE,
   INDEX `Storage_ID`(`Storage_ID` ASC) USING BTREE,
   CONSTRAINT `Storage_ID` FOREIGN KEY (`Storage_ID`) REFERENCES `storage` (`STORAGE_ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of opearterin
@@ -3544,7 +3544,7 @@ CREATE TABLE `operaterout`  (
   `Go2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `Go3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`Operator_Id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of operaterout
@@ -3562,7 +3562,7 @@ CREATE TABLE `priceruler`  (
   `PriceId` int NOT NULL AUTO_INCREMENT,
   `Activate` int NULL DEFAULT NULL,
   PRIMARY KEY (`PriceId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of priceruler
@@ -3570,6 +3570,22 @@ CREATE TABLE `priceruler`  (
 INSERT INTO `priceruler` VALUES (1.00, '2024-04-26 11:04:08', '30Min', NULL, 2, 1);
 INSERT INTO `priceruler` VALUES (0.00, '2024-05-07 14:15:32', 'string', NULL, 4, 1);
 INSERT INTO `priceruler` VALUES (0.00, '2024-05-07 14:15:43', 'string', NULL, 5, 0);
+
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role`  (
+  `RoleId` int NOT NULL AUTO_INCREMENT,
+  `RoleName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`RoleId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES (1, 'admin');
+INSERT INTO `role` VALUES (2, 'editor');
 
 -- ----------------------------
 -- Table structure for storage
@@ -3584,7 +3600,7 @@ CREATE TABLE `storage`  (
   `Storage_Name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `InCode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`STORAGE_ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of storage
@@ -3609,12 +3625,21 @@ CREATE TABLE `user`  (
   `UserType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `FirstName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `LastName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `avatar` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `introduction` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`Id` DESC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', 'test', '1', NULL, NULL);
+INSERT INTO `user` VALUES (2, 'zc', '123456', '2', NULL, NULL, 'https://pic1.zhimg.com/v2-cd25dd72c3e921450790f0eb9b1bfa83_r.jpg?source=1940ef5c', '123');
+INSERT INTO `user` VALUES (1, 'admin', 'test', '1', NULL, NULL, 'https://th.bing.com/th?id=OIP.KwINwKYn-DMCBTqfBpyTkwHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2', '123');
+
+-- ----------------------------
+-- View structure for role_user_view
+-- ----------------------------
+DROP VIEW IF EXISTS `role_user_view`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `role_user_view` AS select `role`.`RoleId` AS `RoleId`,`role`.`RoleName` AS `RoleName`,`user`.`Id` AS `Id`,`user`.`Username` AS `Username`,`user`.`Password` AS `Password`,`user`.`FirstName` AS `FirstName`,`user`.`LastName` AS `LastName`,`user`.`introduction` AS `introduction`,`user`.`avatar` AS `avatar` from (`role` join `user`) where (`user`.`UserType` = `role`.`RoleId`);
 
 SET FOREIGN_KEY_CHECKS = 1;
