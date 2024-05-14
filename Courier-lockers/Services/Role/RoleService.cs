@@ -17,8 +17,7 @@ namespace Courier_lockers.Services.Role
         public GetInfoResponse GetRolesByUserId(int userId)
         {
             var st=_context?.roleUsers.FirstOrDefault(x => x.Id == userId);
-                  
-      
+   
             return  new GetInfoResponse { avatar = st.avatar, introduction = st.introduction, name = st.Username, roles = new List<string> { st.RoleName } };
         }
     }

@@ -47,17 +47,6 @@ namespace Courier_lockers
                     //opt.JsonSerializerOptions.PropertyNamingPolicy = new JsonPolicy.UpperCaseNamingPolicy();
                     opt.JsonSerializerOptions.IgnoreNullValues = true;
                 });
-
-                services.AddCors(options =>
-                {
-                    options.AddPolicy("AllowOrigin",
-                        builder =>
-                        {
-                            builder.AllowAnyOrigin()
-                                   .AllowAnyMethod()
-                                   .AllowAnyHeader();
-                        });
-                });
                 //services.AddAuthentication(options =>
                 //{
                 //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -206,7 +195,6 @@ namespace Courier_lockers
 
 
 
-            app.UseCors("AllowOrigin");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
