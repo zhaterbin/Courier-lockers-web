@@ -35,7 +35,7 @@ namespace Courier_lockers.Controllers.Price
            return  await priceRulerRepository.DeleteRuler(id);
         }
         [HttpPost]
-        [Authorize(policy: "Admin")]
+        [Authorize(policy: "admin")]
         public async Task<bool> UpdateRuler([FromServices]IPriceRulerRepository priceRulerRepository, UpdatePriceTime priceRuler)
         {
             return await priceRulerRepository.UpdateRuler(priceRuler);

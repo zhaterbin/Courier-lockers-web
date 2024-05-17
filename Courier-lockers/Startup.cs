@@ -4,6 +4,7 @@ using Courier_lockers.Helper;
 using Courier_lockers.Models;
 using Courier_lockers.Services;
 using Courier_lockers.Services.UserToken;
+using Courier_lockers.SignalR;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -42,6 +43,7 @@ namespace Courier_lockers
                 services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
                 services.AddControllers();
                 services.AddMemoryCache();
+                services.AddSignalR();
                 services.AddControllers().AddJsonOptions(opt =>
                 {
                     //opt.JsonSerializerOptions.PropertyNamingPolicy = new JsonPolicy.UpperCaseNamingPolicy();
@@ -197,6 +199,7 @@ namespace Courier_lockers
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<Myhub>("myhub");
                 endpoints.MapControllers();
             });
 

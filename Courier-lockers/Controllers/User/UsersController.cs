@@ -91,5 +91,8 @@ namespace Courier_lockers.Controllers.User
             var st=_roleService.GetRolesByUserId(int.Parse(id));
             return st;
         }
+
+        //[HttpPost]
+        //public 
     }
 }
