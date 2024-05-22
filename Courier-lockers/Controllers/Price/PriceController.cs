@@ -10,7 +10,6 @@ using WMSService.Models;
 namespace Courier_lockers.Controllers.Price
 {
     [ApiController]
-   
     [Route("api/InStorage/[action]")]
     public class PriceController : ControllerBase
     {

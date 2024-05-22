@@ -3,7 +3,7 @@ using Courier_lockers.Entities;
 using Courier_lockers.Repos;
 using ServiceStack;
 
-namespace Courier_lockers.Services.Role
+namespace Courier_lockers.Services.Roles
 {
     public class RoleService:IRoleService
     {
@@ -12,6 +12,17 @@ namespace Courier_lockers.Services.Role
         public RoleService(ServiceDbContext context)
         {
             _context=context?? throw new ArgumentNullException(nameof(context));
+        }
+
+        public List<rolesList> GetRoles()
+        {
+             return  _context.roleUsers.Where(f=>true).Select(v=>new rolesList
+             {
+                 Id=v.Id,
+                 Key=v.RoleName,
+                 Name=v.Username,
+                 Description=v.introduction
+             }).ToList();
         }
 
         public GetInfoResponse GetRolesByUserId(int userId)

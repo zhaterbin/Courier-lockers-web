@@ -9,8 +9,9 @@ using System.Security.Claims;
 using Courier_lockers.Repos;
 using System.Net;
 using ServiceStack;
-using Courier_lockers.Services.Role;
+using Courier_lockers.Services.Roles;
 using Microsoft.Extensions.Caching.Memory;
+using Courier_lockers.Entities;
 
 namespace Courier_lockers.Controllers.User
 {
@@ -92,6 +93,44 @@ namespace Courier_lockers.Controllers.User
             return st;
         }
 
+        [HttpGet]
+        public List<rolesList> userRole()
+        {
+            return _roleService.GetRoles();
+        }
+        /// <summary>
+        /// 暂时是一个假数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<IEnumerable<RouteInfo>> GetRoutes()
+        {
+            var routes = new List<RouteInfo>
+        {
+            new RouteInfo
+            {
+                Path = "/dashboard",
+                Title = "Dashboard",
+                Hidden = false,
+                AlwaysShow = true,
+                Meta = new Meta { Title = "Dashboard" },
+                Children = new List<RouteInfo>
+                {
+                    new RouteInfo
+                    {
+                        Path = "index",
+                        Title = "Dashboard Index",
+                        Hidden = false,
+                        AlwaysShow = false,
+                        Meta = new Meta { Title = "Dashboard Index" },
+                        Children = new List<RouteInfo>()
+                    }
+                }
+            }
+        };
+
+            return Ok(routes);
+        }
         //[HttpPost]
         //public 
     }

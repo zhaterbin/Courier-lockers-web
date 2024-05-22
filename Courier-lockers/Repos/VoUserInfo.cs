@@ -16,4 +16,34 @@
             Name = name;
         }
     }
+
+    public class rolesList
+    {
+        public int Id { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class RoleRouteInfo
+    {
+        public string Key { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+    public class RouteInfo
+    {
+        public string Path { get; set; }
+        public string Title { get; set; }
+        public bool Hidden { get; set; }
+        public bool AlwaysShow { get; set; }
+        public List<RouteInfo> Children { get; set; }
+        public Meta Meta { get; set; }
+    }
+
+    public class Meta
+    {
+        public string Title { get; set; }
+    }
+
 }
